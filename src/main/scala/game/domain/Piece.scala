@@ -7,6 +7,13 @@ trait Piece { self =>
   def step: Step
   def movingDirection: Option[Direction]
   def possibleDirections: List[Direction]
+  def moves(direction: Direction): Stream[Position] = {
+    def go(current: Position): Stream[Position] = {
+      val newPosition = direction.transform(current)
+      Stream.cons(newPosition, go(newPosition))
+    }
+    go(position)
+  }
 }
 
 case class King(override val position: Position, override val movingDirection: Option[Direction]) extends Piece {

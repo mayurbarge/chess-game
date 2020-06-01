@@ -55,5 +55,13 @@ class PieceTest extends FunSpec with Matchers {
         Pawn(Position(1,1), None).possibleDirections should contain theSameElementsAs List(North, South, NorthEast, NorthWest, SouthEast, SouthWest)
       }
     }
+
+    describe("move") {
+      it("should be able to produce moves for given piece and direction") {
+        King(Position(3,3), None).moves(East).take(1).head shouldBe Position(4,3)
+        Queen(Position(3,3), None).moves(NorthEast).take(1).head shouldBe Position(4,4)
+      }
+
+    }
   }
 }
