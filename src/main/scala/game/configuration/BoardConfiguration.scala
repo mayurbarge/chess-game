@@ -21,4 +21,8 @@ object ChessBoard extends BoardConfiguration {
   def isValidPosition(position: Position) =
     validPositions.exists(validPosition => validPosition.row == position.row && validPosition.col == position.col)
 
+  def possibleMoves(piece: Piece) = piece.step match {
+    case SingleStep => piece.possibleDirections.flatMap(direction => piece.moves(direction).take(1).toList)
+    case MultiStep => piece.possibleDirections.flatMap(direction => piece.moves(direction).takeWhile(isValidPosition).toList)
+  }
 }

@@ -62,6 +62,12 @@ class PieceTest extends FunSpec with Matchers {
         Queen(Position(3,3), None).moves(NorthEast).take(1).head shouldBe Position(4,4)
       }
 
+      it("should move King by one step") {
+        King(Position(2,2),None).moves(East).take(1).head shouldBe Position(3,2)
+      }
+      it("should return multiple step moves for Queen in given direction") {
+        Queen(Position(2,2),None).moves(East).take(2).toList should contain theSameElementsAs List(Position(3,2), Position(4,2))
+      }
     }
   }
 }
