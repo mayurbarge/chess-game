@@ -1,6 +1,6 @@
 package game.configuration
 
-import game.domain.{King, Position, Rook}
+import game.domain.{Cell, King, Position, Rook}
 import org.scalatest.{FunSpec, Matchers}
 
 class ChessBoardTest extends FunSpec with Matchers {
@@ -33,6 +33,9 @@ class ChessBoardTest extends FunSpec with Matchers {
         Position(1,2),Position(1,3),Position(1,4),Position(1,5),Position(1,6),Position(1,7),Position(1,8),
         Position(2,1),Position(3,1),Position(4,1),Position(5,1),Position(6,1),Position(7,1),Position(8,1)
         )
+    }
+    it("should return Cells for given positions") {
+      ChessBoard.getCells(List(Position(1,1),Position(8,8))) should contain theSameElementsAs List(Cell("A1", Position(1,1)), Cell("H8",Position(8,8)))
     }
   }
 }
