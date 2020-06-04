@@ -33,7 +33,7 @@ object ChessRunner extends IOApp {
           } yield {
             println("Output - " + ChessBoard.getCells(ChessBoard.possibleMoves(piece)).map(_.label).mkString(","))
           }
-        )
+          )
       }
       case None => IO(println("Invalid cell position provided"))
     }
