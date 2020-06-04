@@ -28,4 +28,6 @@ object ChessBoard extends BoardConfiguration {
     case SingleStep => piece.possibleDirections.flatMap(direction => piece.moves(direction).take(1).toList)
     case MultiStep => piece.possibleDirections.flatMap(direction => piece.moves(direction).takeWhile(isValidPosition).toList)
   }
+
+  def findCellByLabel(label: String) = cells.find(_.label == label)
 }

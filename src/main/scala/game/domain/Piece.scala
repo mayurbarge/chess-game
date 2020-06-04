@@ -38,5 +38,17 @@ case class Rook(override val position: Position, override val movingDirection: O
 }
 case class Pawn(override val position: Position, override val movingDirection: Option[Direction]) extends Piece {
   def step: Step = SingleStep
-  def possibleDirections: List[Direction] = Diagonal.movementToDirections ++ Vertical.movementToDirections
+  def possibleDirections: List[Direction] = Vertical.movementToDirections
+}
+
+object Piece {
+  def apply(name: String, position: Position): Option[Piece] = name match {
+    case "King" => Some(King(position, None))
+    case "Queen" => Some(Queen(position, None))
+    case "Bishop" => Some(Bishop(position, None))
+    case "Horse" => Some(Horse(position, None))
+    case "Rook" => Some(Rook(position, None))
+    case "Pawn" => Some(Pawn(position, None))
+    case _=> None
+  }
 }

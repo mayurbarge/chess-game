@@ -51,8 +51,8 @@ class PieceTest extends FunSpec with Matchers {
       it("should take single step") {
         Pawn(Position(1,1), None).step shouldBe SingleStep
       }
-      it("should be able to move in directions North, South, NorthEast, NorthWest, SouthEast and SouthWest") {
-        Pawn(Position(1,1), None).possibleDirections should contain theSameElementsAs List(North, South, NorthEast, NorthWest, SouthEast, SouthWest)
+      it("should be able to move in directions North, South") {
+        Pawn(Position(1,1), None).possibleDirections should contain theSameElementsAs List(North, South)
       }
     }
 
@@ -68,6 +68,28 @@ class PieceTest extends FunSpec with Matchers {
       it("should return multiple step moves for Queen in given direction") {
         Queen(Position(2,2),None).moves(East).take(2).toList should contain theSameElementsAs List(Position(3,2), Position(4,2))
       }
+    }
+
+    it("should create King") {
+      Piece("King", Position(1,1)) shouldBe Some(King(Position(1,1), None))
+    }
+    it("should create Queen") {
+      Piece("Queen", Position(1,1)) shouldBe Some(Queen(Position(1,1), None))
+    }
+    it("should create Bishop") {
+      Piece("Bishop", Position(1,1)) shouldBe Some(Bishop(Position(1,1), None))
+    }
+    it("should create Horse") {
+      Piece("Horse", Position(1,1)) shouldBe Some(Horse(Position(1,1), None))
+    }
+    it("should create Rook") {
+      Piece("Rook", Position(1,1)) shouldBe Some(Rook(Position(1,1), None))
+    }
+    it("should create Pawn") {
+      Piece("Pawn", Position(1,1)) shouldBe Some(Pawn(Position(1,1), None))
+    }
+    it("should return None when name of piece is invalid") {
+      Piece("xyz", Position(1,1)) shouldBe None
     }
   }
 }
