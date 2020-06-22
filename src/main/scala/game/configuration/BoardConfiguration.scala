@@ -25,8 +25,8 @@ object ChessBoard extends BoardConfiguration {
       cells.map(_.position).exists(validPosition => validPosition.row == position.row && validPosition.col == position.col)
 
   def possibleMoves(piece: Piece) = piece.step match {
-    case SingleStep => piece.possibleDirections.flatMap(direction => piece.moves(direction).take(1).toList)
-    case MultiStep => piece.possibleDirections.flatMap(direction => piece.moves(direction).takeWhile(isValidPosition).toList)
+    case SingleStep => piece.allMoves().take(1)
+    case MultiStep => piece.allMoves().takeWhile(isValidPosition)
   }
 
   def findCellByLabel(label: String) = cells.find(_.label == label)

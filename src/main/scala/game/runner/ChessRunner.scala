@@ -14,7 +14,9 @@ object ChessRunner extends IOApp {
     } yield {
         processInputTokens(inputs)
     }
-    result.flatMap(e => e.as(ExitCode.Success))
+    result.unsafeRunSync()
+
+    IO(ExitCode.Success)
   }
 
   private def processInputTokens(inputs: String) = {

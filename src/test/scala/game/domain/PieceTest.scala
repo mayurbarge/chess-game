@@ -3,6 +3,7 @@ package game.domain
 import game.rules.{MultiStep, SingleStep}
 import org.scalatest.{FunSpec, Matchers}
 
+
 class PieceTest extends FunSpec with Matchers {
   describe("Piece") {
     describe("King") {
@@ -11,6 +12,10 @@ class PieceTest extends FunSpec with Matchers {
       }
       it("should be able to move in East, West, North, South, NorthEast, NorthWest, SouthEast and SouthSouthWest directions") {
         King(Position(1,1), None).possibleDirections should contain theSameElementsAs List(East,West,North,South,NorthEast,NorthWest,SouthEast,SouthWest)
+      }
+
+      it("should calculate all moves for King") {
+        King(Position(1,1), None).allMoves() should contain theSameElementsAs List(Position(1,2), Position(2,1))
       }
     }
     describe("Queen") {
@@ -58,15 +63,15 @@ class PieceTest extends FunSpec with Matchers {
 
     describe("move") {
       it("should be able to produce moves for given piece and direction") {
-        King(Position(3,3), None).moves(East).take(1).head shouldBe Position(4,3)
-        Queen(Position(3,3), None).moves(NorthEast).take(1).head shouldBe Position(4,4)
+        King(Position(3,3), None).moves(East.transform).take(1).head shouldBe Position(4,3)
+        Queen(Position(3,3), None).moves(NorthEast.transform).take(1).head shouldBe Position(4,4)
       }
 
       it("should move King by one step") {
-        King(Position(2,2),None).moves(East).take(1).head shouldBe Position(3,2)
+        King(Position(2,2),None).moves(East.transform).take(1).head shouldBe Position(3,2)
       }
       it("should return multiple step moves for Queen in given direction") {
-        Queen(Position(2,2),None).moves(East).take(2).toList should contain theSameElementsAs List(Position(3,2), Position(4,2))
+        Queen(Position(2,2),None).moves(East.transform).take(2).toList should contain theSameElementsAs List(Position(3,2), Position(4,2))
       }
     }
 
